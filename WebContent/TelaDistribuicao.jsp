@@ -115,8 +115,23 @@
 
 				</select>
 
+				<!-- Seleção de Colaborador -->
+				<br>
+				<p>Escolha o colaborador:</p>
+				<select class="form-control" name="membroEquipe" required="required">
+					<!-- Inclusão de Opções de Material de Consumo  -->
+					<option>Erick Santos</option>
+					<option>Iolanda Diaz</option>
+					<option>Micheli Racioppi</option>
+					<option>Zuleica Fonseca</option>
+					<option>Outros não listados</option>
+
+				</select>
+				<!-- Fim de Seleção de Colaborador -->
+
 				<!-- Botões -->
-				<div align="left"><br>
+				<div align="left">
+					<br>
 					<button type="submit" class="btn btn-primary btn-lg">Atribuir
 						Processo</button>
 				</div>
@@ -148,7 +163,7 @@
 					<option>EQUIPAM/UTENSILIOS MEDICOS,ODONTO,LAB E HOSP</option>
 					<option>APARELHO E EQUIPAMENTO P/ESPORTES E DIVERSOES</option>
 					<option>EQUIPAMENTO DE PROTECAO, SEGURANCA E SOCORRO</option>
-										
+
 					<option>EQUIPAMENTOS DE PROCESSAMENTO DE DADOS</option>
 					<option>EQUIPAMENTOS PARA AUDIO, VIDEO E FOTO</option>
 					<option>MAQUINAS E UTENSILIOS DE ESCRITORIO</option>
@@ -156,16 +171,16 @@
 					<option>MOBILIARIO EM GERAL</option>
 					<option>COLECOES E MATERIAIS BIBLIOGRAFICOS</option>
 					<option>DISCOTECAS E FILMOTECA</option>
-										
+
 					<option>VEICULOS EM GERAL</option>
 					<option>VEICULOS DE TRACAO MECANICA</option>
 					<option>EQUIPAMENTOS, PECAS E ACESSORIOS P/AUTOMOVEIS</option>
 					<option>EQUIPAMENTOS HIDRAULICOS E ELETRICOS</option>
-										
+
 					<option>MAQUINAS, FERRAMENTAS E UTENSILIOS DE OFICINA</option>
 					<option>MAQUINAS, UTENSILIOS E EQUIPAMENTOS DIVERSOS</option>
-					
-					
+
+
 					<!-- Não utilizados -->
 					<!-- 
 					<option>ARMAMENTOS</option>
@@ -179,17 +194,32 @@
 					<option>MAQUINAS E EQUIPAMENTOS ENERGETICOS</option>
 					 -->
 				</select>
-			
+
+				<!-- Seleção de Colaborador -->
+				<br>
+				<p>Escolha o colaborador:</p>
+				<select class="form-control" name="membroEquipe" required="required">
+					<!-- Inclusão de Opções de Material de Consumo  -->
+					<option>Erick Santos</option>
+					<option>Iolanda Diaz</option>
+					<option>Micheli Racioppi</option>
+					<option>Zuleica Fonseca</option>
+					<option>Outros não listados</option>
+
+				</select>
+
+				<!-- Fim de Seleção de Colaborador -->
 
 
-			<!-- Botões -->
-			<div align="left"><br>
-				<button type="submit" class="btn btn-primary btn-lg">Atribuir
-					Processo</button>
+				<!-- Botões -->
+				<div align="left">
+					<br>
+					<button type="submit" class="btn btn-primary btn-lg">Atribuir
+						Processo</button>
+				</div>
+				<!--  Fim de Botões -->
 			</div>
-			<!--  Fim de Botões -->
-	</div>
-	</form>
+		</form>
 	</div>
 </body>
 </html>
