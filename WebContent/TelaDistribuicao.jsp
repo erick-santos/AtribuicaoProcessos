@@ -40,40 +40,47 @@
 		<h1>Distribuição de Processos - SERLLC</h1>
 		<br>
 
-		<form action="AdicionaProcesso" method="get">
 
-			<div class="form-group">
 
-				<input type="text" class="form-control" name="numeroProcesso"
-					placeholder="Insira o número do processo" required="required"
-					maxlength="64">
-			</div>
-			<br>
+		<!-- Construcao dos Radio Buttons  -->
+		<div>
 
-			<div class="col-md-6" style="padding: 0px">
-				<p>Escolha a linha de material:</p>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="linhaMaterial"
-						id="linhaMaterial1" value="Consumo"> <label
-						class="form-check-label" for="exampleRadios1"> Consumo </label>
-				</div>
+			<p>Escolha a linha de material:</p>
 
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="linhaMaterial"
-						id="linhaMaterial2" value="Permanente"> <label
-						class="form-check-label" for="exampleRadios2"> Permanente
-					</label>
-				</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="linhaMaterial"
+					id="linhaMaterial1" value="Consumo"> <label
+					class="form-check-label" for="exampleRadios1"> Consumo </label>
 			</div>
 
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="linhaMaterial"
+					id="linhaMaterial2" value="Permanente"> <label
+					class="form-check-label" for="exampleRadios2"> Permanente </label>
+			</div>
 
-			<!-- Div de Material de Consumo -->
+		</div>
+
+		<!-- Manipular divs conforme radio button escolhido -->
+
+		<!-- Div de Material de Consumo -->
+		<form action="AdicionaProcConsumo" method="get">
 
 			<div class="col-md-12 div-consumo"
 				style="padding: 20px; display: none" align="left">
+				<div class="form-group">
+
+					<input type="text" class="form-control" name="numeroProcesso"
+						placeholder="Insira o número do processo" required="required"
+						maxlength="64"> <input type="hidden" name="linhaMaterial"
+						value="Consumo">
+
+				</div>
+
 
 				<p>Escolha a eixo temático:</p>
 				<select class="form-control" name="eixoTematico" required="required">
+					<!-- Inclusão de Opções de Material de Consumo  -->
 					<option>GENERO DE ALIMENTAÇÃO</option>
 					<option>MATERIAL EDUCATIVO E ESPORTIVO</option>
 					<option>MATERIAL PARA FESTIVIDADES E HOMENAGENS</option>
@@ -107,35 +114,51 @@
 					<option>MATERIAL PARA DIVULGAÇÃO</option>
 
 				</select>
+
+				<!-- Botões -->
+				<div align="left"><br>
+					<button type="submit" class="btn btn-primary btn-lg">Atribuir
+						Processo</button>
+				</div>
+				<!--  Fim de Botões -->
 			</div>
+		</form>
 
 
-			<!-- Div de Material Permanente -->
 
+		<!-- Div de Material Permanente -->
+		<form action="AdicionaProcPermanente" method="get">
 			<div class=" col-md-12 div-permanente"
 				style="padding: 20px; display: none" align="left">
 				<div class="form-group">
-					<p>Escolha a eixo temático:</p>
-					<select class="form-control" name="eixoTematico"
-						required="required">
-						<option>GENERO XXX</option>
 
+					<input type="text" class="form-control" name="numeroProcesso"
+						placeholder="Insira o número do processo" required="required"
+						maxlength="64"> <input type="hidden" name="linhaMaterial"
+						value="Permanente">
 
-					</select>
 				</div>
-			</div>
 
-			<div  align="left">
-				<br>
+
+				<p>Escolha a eixo temático:</p>
+				<select class="form-control" name="eixoTematico" required="required">
+					<!-- Inclusão de Opções de Material de Consumo  -->
+					<option>GENERO 01</option>
+					<option>GENERO 02</option>
+					<option>GENERO 03</option>
+
+				</select>
+			
+
+
+			<!-- Botões -->
+			<div align="left"><br>
 				<button type="submit" class="btn btn-primary btn-lg">Atribuir
 					Processo</button>
 			</div>
+			<!--  Fim de Botões -->
 	</div>
-
-
 	</form>
-
-
 	</div>
 </body>
 </html>
