@@ -142,7 +142,7 @@
 
 				<p>Escolha a eixo temático:</p>
 				<select class="form-control" name="eixoTematico" required="required">
-					<!-- Inclusão de Opções de Material de Consumo  -->
+					<!-- Inclusão de Opções Permanente  -->
 					<option>APARELHOS DE MEDICAO E ORIENTACAO</option>
 					<option>APARELHOS E EQUIPAMENTOS DE COMUNICACAO</option>
 					<option>EQUIPAM/UTENSILIOS MEDICOS,ODONTO,LAB E HOSP</option>
