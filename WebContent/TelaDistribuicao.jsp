@@ -64,7 +64,7 @@
 		<!-- Manipular divs conforme radio button escolhido -->
 
 		<!-- Div de Material de Consumo -->
-		<form action="AdicionaProcConsumo" method="get">
+		<form action="AdicionaProcesso" method="get">
 
 			<div class="col-md-12 div-consumo"
 				style="padding: 20px; display: none" align="left">
@@ -127,7 +127,7 @@
 
 
 		<!-- Div de Material Permanente -->
-		<form action="AdicionaProcPermanente" method="get">
+		<form action="AdicionaProcesso" method="get">
 			<div class=" col-md-12 div-permanente"
 				style="padding: 20px; display: none" align="left">
 				<div class="form-group">
@@ -143,10 +143,41 @@
 				<p>Escolha a eixo temático:</p>
 				<select class="form-control" name="eixoTematico" required="required">
 					<!-- Inclusão de Opções de Material de Consumo  -->
-					<option>GENERO 01</option>
-					<option>GENERO 02</option>
-					<option>GENERO 03</option>
-
+					<option>APARELHOS DE MEDICAO E ORIENTACAO</option>
+					<option>APARELHOS E EQUIPAMENTOS DE COMUNICACAO</option>
+					<option>EQUIPAM/UTENSILIOS MEDICOS,ODONTO,LAB E HOSP</option>
+					<option>APARELHO E EQUIPAMENTO P/ESPORTES E DIVERSOES</option>
+					<option>EQUIPAMENTO DE PROTECAO, SEGURANCA E SOCORRO</option>
+										
+					<option>EQUIPAMENTOS DE PROCESSAMENTO DE DADOS</option>
+					<option>EQUIPAMENTOS PARA AUDIO, VIDEO E FOTO</option>
+					<option>MAQUINAS E UTENSILIOS DE ESCRITORIO</option>
+					<option>APARELHOS E UTENSILIOS DOMESTICOS</option>
+					<option>MOBILIARIO EM GERAL</option>
+					<option>COLECOES E MATERIAIS BIBLIOGRAFICOS</option>
+					<option>DISCOTECAS E FILMOTECA</option>
+										
+					<option>VEICULOS EM GERAL</option>
+					<option>VEICULOS DE TRACAO MECANICA</option>
+					<option>EQUIPAMENTOS, PECAS E ACESSORIOS P/AUTOMOVEIS</option>
+					<option>EQUIPAMENTOS HIDRAULICOS E ELETRICOS</option>
+										
+					<option>MAQUINAS, FERRAMENTAS E UTENSILIOS DE OFICINA</option>
+					<option>MAQUINAS, UTENSILIOS E EQUIPAMENTOS DIVERSOS</option>
+					
+					
+					<!-- Não utilizados -->
+					<!-- 
+					<option>ARMAMENTOS</option>
+					<option>PECAS NAO INCORPORAVEIS A IMOVEIS</option>
+					<option>MATERIAL DE USO DURADOURO</option>
+					<option>OBRAS DE ARTE E PECAS PARA EXPOSICAO</option>
+					<option>INSTRUMENTOS MUSICAIS E ARTISTICOS</option>
+					<option>MAQUINAS E EQUIPAMENTOS GRAFICOS</option>
+					<option>BANDEIRAS FLAMULAS E INSIGNIAS</option>
+					<option>MAQUINAS E EQUIPAMENTOS INDUSTRIAIS</option>
+					<option>MAQUINAS E EQUIPAMENTOS ENERGETICOS</option>
+					 -->
 				</select>
 			
 
