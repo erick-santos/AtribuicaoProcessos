@@ -33,7 +33,7 @@
 		});
 	});
 </script>
-<title>Distribuição de Processos</title>
+<title>Alteração de Processos</title>
 </head>
 <body>
 
@@ -46,7 +46,7 @@
 
 	<div class="container" align="left">
 
-		<h1>Distribuição de Processos</h1>
+		<h1>Alteração de Processos</h1>
 		<br>
 
 
@@ -211,10 +211,10 @@
 				<p>Escolha o colaborador:</p>
 				<select class="form-control" name="membroEquipe" required="required">
 					<!-- Inclusão de Opções de Material de Consumo  -->
-					<option>Membro1</option>
-					<option>Membro2</option>
-					<option>Membro3</option>
-					<option>Membro4</option>
+					<option>Erick Santos</option>
+					<option>Iolanda Diaz</option>
+					<option>Micheli Racioppi</option>
+					<option>Zuleica Fonseca</option>
 					<option>Outros não listados</option>
 
 				</select>
