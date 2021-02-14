@@ -32,27 +32,22 @@ public class AdicionaProcessoServlet extends HttpServlet {
 		java.util.Date data = new java.util.Date();
 		p.setLd(data);
 
-		
-		PrintWriter out = response.getWriter();
-
-		out.println("O processo foi atribuido com sucesso!");
-		out.println("======================================================");
-		out.println("Processo nº:" + p.getNumeroProcesso());
-		out.println("Linha de Material:" + p.getLinhaMaterial());
-		out.println("Eixo temático:" + p.getEixoTematico());
-		out.println("Colaborador:" + p.getMembroEquipe());
-		out.println("Data:" + p.getLd());
-		out.println("======================================================");
-
-		
 		ProcessoDao pDao = new ProcessoDao();
 
 		try {
+
 			pDao.adicionarProcesso(p);
+			String mensagem = "Processo atribuido com sucesso!";
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+		String mensagem = "Processo atribuido com sucesso!";
+		request.setAttribute("MSG", mensagem);
+
+		RequestDispatcher rd = request.getRequestDispatcher("TelaDistribuicao.jsp");
+		rd.forward(request, response);
 	}
 }

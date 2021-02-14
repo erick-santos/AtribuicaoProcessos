@@ -33,22 +33,49 @@
 		});
 	});
 </script>
+
+<script type="text/javascript">
+	function validaNumProcesso(v){
+		v.value=v.value.replace(/\D/g,"");	
+	}
+</script>
+
 <title>Distribuição de Processos</title>
 </head>
 <body>
 
-	<div class="container" style="padding: 20px" align="right">
+	<div class="container pt-3" style="padding: 20px" align="right">
 		<form action="ListarProcessos" method="get">
 			<button type="submit" class="btn btn-info btn-md">Listar
 				Processos Atribuidos</button>
 		</form>
 	</div>
 
-	<div class="container" align="left">
+	<div class="container pt-3 " align="left">
 
 		<h1>Distribuição de Processos</h1>
 		<br>
 
+		<!-- Inicio da mensagem de sucesso -->
+		<%
+			String msg = (String) request.getAttribute("MSG");
+		%>
+		<%
+			if (msg != null) {
+			request.setAttribute("MSG", null);
+		%>
+		<div class="alert alert-success alert-dismissible fade show"
+			role="alert">
+			<strong><%=msg%></strong>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<%
+			}
+		%>
+		<!-- Fim da mensagem de sucesso-->
 
 
 		<!-- Construcao dos Radio Buttons  -->
@@ -79,11 +106,11 @@
 				style="padding: 20px; display: none" align="left">
 				<div class="form-group">
 
-					<input type="text" class="form-control" name="numeroProcesso"
-						placeholder="Insira o número do processo" required="required"
-						maxlength="64"> <input type="hidden" name="linhaMaterial"
+					<input type="text" class="form-control" name="numeroProcesso" maxlength="17"
+						onkeypress="validaNumProcesso(this)" onkeyup="validaNumProcesso(this)" placeholder="Insira o número do processo" required="required"> 
+						
+						<input type="hidden" name="linhaMaterial"
 						value="Consumo">
-
 
 				</div>
 
@@ -130,11 +157,11 @@
 				<p>Escolha o colaborador:</p>
 				<select class="form-control" name="membroEquipe" required="required">
 					<!-- Inclusão de Opções de Material de Consumo  -->
-					<option>Erick Santos</option>
-					<option>Iolanda Diaz</option>
-					<option>Micheli Racioppi</option>
-					<option>Zuleica Fonseca</option>
-					<option>Outros não listados</option>
+					<option>ZippyRascal</option>
+					<option>RuddyNapoleon</option>
+					<option>KaputEgg</option>
+					<option>DefiantDallas</option>
+					<option>EarthyLeo</option>
 
 				</select>
 				<!-- Fim de Seleção de Colaborador -->
@@ -157,8 +184,8 @@
 				style="padding: 20px; display: none" align="left">
 				<div class="form-group">
 
-					<input type="text" class="form-control" name="numeroProcesso"
-						placeholder="Insira o número do processo" required="required"
+					<input type="text" class="form-control" name="numeroProcesso" maxlength="17"
+						onkeypress="validaNumProcesso(this)" onkeyup="validaNumProcesso(this)" placeholder="Insira o número do processo" required="required"
 						maxlength="64"> <input type="hidden" name="linhaMaterial"
 						value="Permanente">
 
@@ -211,11 +238,11 @@
 				<p>Escolha o colaborador:</p>
 				<select class="form-control" name="membroEquipe" required="required">
 					<!-- Inclusão de Opções de Material de Consumo  -->
-					<option>Membro1</option>
-					<option>Membro2</option>
-					<option>Membro3</option>
-					<option>Membro4</option>
-					<option>Outros não listados</option>
+					<option>ZippyRascal</option>
+					<option>RuddyNapoleon</option>
+					<option>KaputEgg</option>
+					<option>DefiantDallas</option>
+					<option>EarthyLeo</option>
 
 				</select>
 
@@ -233,6 +260,26 @@
 		</form>
 
 		<br>
+
+		<!-- Tabela gráfica com o produção -->
+
+		<p class="progress-bar progress-bar-striped progress-bar-animated"
+			style="width: 30%">ZippyRascal</p>
+
+		<p class="progress-bar progress-bar-striped progress-bar-animated"
+			style="width: 40%">RuddyNapoleon</p>
+
+		<p class="progress-bar progress-bar-striped progress-bar-animated"
+			style="width: 70%">KaputEgg</p>
+
+		<p class="progress-bar progress-bar-striped progress-bar-animated"
+			style="width: 60%">DefiantDallas</p>
+
+		<p class="progress-bar progress-bar-striped progress-bar-animated"
+			style="width: 95%">EarthyLeo</p>
+
+		<!-- Fim da Tabela com o processo a ser alterado -->
+
 
 
 	</div>

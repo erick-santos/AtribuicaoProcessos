@@ -46,15 +46,60 @@
 
 	<div class="container" align="left">
 
-		<h1>Alteração de Processos</h1>
+		<h2>Alteração de Processos</h2>
+
+		<!-- Recebe o objeto processo de GerenciarProcessoServlet -->
+		<c:set var="processo" value="${PROCESSO}" />
+
+
+		<!-- Inicio da mensagem de sucesso -->
+		<%
+			String msg = (String) request.getAttribute("MSG");
+		%>
+		<%
+			if (msg != null) {
+			request.setAttribute("MSG", null);
+		%>
+		<div class="alert alert-success alert-dismissible fade show"
+			role="alert">
+			<strong><%=msg%></strong>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<%
+			}
+		%>
+		<!-- Fim da mensagem de sucesso-->
+
+
+		<!-- Tabela com o processo a ser alterado -->
+		<table id="idTabelaProcessos" class="table table-striped">
+			<thead align="left">
+				<tr>
+					<th>Número do Processo</th>
+					<th>Linha de Material</th>
+					<th>Eixo Tematico</th>
+					<th>Colaborador</th>
+					<th>Fase</th>
+				</tr>
+			</thead>
+			<tr align="left">
+				<td>${PROCESSO.numeroProcesso}</td>
+				<td>${PROCESSO.linhaMaterial}</td>
+				<td>${PROCESSO.eixoTematico}</td>
+				<td>${PROCESSO.membroEquipe}</td>
+				<td>Não definido</td>
+			</tr>
+		</table>
+		<!-- Fim da Tabela com o processo a ser alterado -->
 		<br>
-
-
 
 		<!-- Construcao dos Radio Buttons  -->
 		<div>
 
-			<p>Escolha a linha de material:</p>
+			<p>Para alterar escolha a linha de material:</p>
 
 			<div class="form-check">
 				<input class="form-check-input" type="radio" name="linhaMaterial"
@@ -69,21 +114,23 @@
 			</div>
 
 		</div>
+		<!-- Fim dos Radio Buttons  -->
+
 
 		<!-- Manipular divs conforme radio button escolhido -->
 
 		<!-- Div de Material de Consumo -->
-		<form action="AdicionaProcesso" method="get">
+		<form action="AlteraProcesso" method="get">
 
 			<div class="col-md-12 div-consumo"
 				style="padding: 20px; display: none" align="left">
 				<div class="form-group">
-
-					<input type="text" class="form-control" name="numeroProcesso"
+					<input type="hidden" name="idProcesso" value="${PROCESSO.id}">
+					<input type="text" value="${PROCESSO.numeroProcesso}"
+						class="form-control" name="numeroProcesso"
 						placeholder="Insira o número do processo" required="required"
 						maxlength="64"> <input type="hidden" name="linhaMaterial"
 						value="Consumo">
-
 
 				</div>
 
@@ -91,6 +138,7 @@
 				<p>Escolha a eixo temático:</p>
 				<select class="form-control" name="eixoTematico" required="required">
 					<!-- Inclusão de Opções de Material de Consumo  -->
+					<option></option>
 					<option>GENERO DE ALIMENTAÇÃO</option>
 					<option>MATERIAL EDUCATIVO E ESPORTIVO</option>
 					<option>MATERIAL PARA FESTIVIDADES E HOMENAGENS</option>
@@ -130,11 +178,12 @@
 				<p>Escolha o colaborador:</p>
 				<select class="form-control" name="membroEquipe" required="required">
 					<!-- Inclusão de Opções de Material de Consumo  -->
-					<option>Erick Santos</option>
-					<option>Iolanda Diaz</option>
-					<option>Micheli Racioppi</option>
-					<option>Zuleica Fonseca</option>
-					<option>Outros não listados</option>
+					<option></option>
+					<option>ZippyRascal</option>
+					<option>RuddyNapoleon</option>
+					<option>KaputEgg</option>
+					<option>DefiantDallas</option>
+					<option>EarthyLeo</option>
 
 				</select>
 				<!-- Fim de Seleção de Colaborador -->
@@ -152,12 +201,14 @@
 
 
 		<!-- Div de Material Permanente -->
-		<form action="AdicionaProcesso" method="get">
+		<form action="AlteraProcesso" method="get">
 			<div class=" col-md-12 div-permanente"
 				style="padding: 20px; display: none" align="left">
 				<div class="form-group">
 
-					<input type="text" class="form-control" name="numeroProcesso"
+					<input type="hidden" name="idProcesso" value="${PROCESSO.id}">
+					<input type="text" value="${PROCESSO.numeroProcesso}"
+						class="form-control" name="numeroProcesso"
 						placeholder="Insira o número do processo" required="required"
 						maxlength="64"> <input type="hidden" name="linhaMaterial"
 						value="Permanente">
@@ -169,6 +220,7 @@
 				<p>Escolha a eixo temático:</p>
 				<select class="form-control" name="eixoTematico" required="required">
 					<!-- Inclusão de Opções Permanente  -->
+					<option></option>
 					<option>APARELHOS DE MEDICAO E ORIENTACAO</option>
 					<option>APARELHOS E EQUIPAMENTOS DE COMUNICACAO</option>
 					<option>EQUIPAM/UTENSILIOS MEDICOS,ODONTO,LAB E HOSP</option>
@@ -211,11 +263,12 @@
 				<p>Escolha o colaborador:</p>
 				<select class="form-control" name="membroEquipe" required="required">
 					<!-- Inclusão de Opções de Material de Consumo  -->
-					<option>Erick Santos</option>
-					<option>Iolanda Diaz</option>
-					<option>Micheli Racioppi</option>
-					<option>Zuleica Fonseca</option>
-					<option>Outros não listados</option>
+					<option></option>
+					<option>ZippyRascal</option>
+					<option>RuddyNapoleon</option>
+					<option>KaputEgg</option>
+					<option>DefiantDallas</option>
+					<option>EarthyLeo</option>
 
 				</select>
 
@@ -233,8 +286,6 @@
 		</form>
 
 		<br>
-
-
 	</div>
 </body>
 </html>

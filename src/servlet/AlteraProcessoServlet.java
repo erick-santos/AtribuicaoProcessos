@@ -12,22 +12,38 @@ import javax.servlet.http.HttpServletResponse;
 import DAO.ProcessoDao;
 import model.Processo;
 
-@WebServlet("/GerenciarProcessos")
-public class AlteraProcessoServlet  extends HttpServlet{
+@WebServlet("/AlteraProcesso")
+public class AlteraProcessoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		Processo p = new Processo();
-		p.setId(Integer.parseInt(request.getParameter("idProcesso"))); 
+		p.setId(Integer.parseInt(request.getParameter("idProcesso")));
+		p.setNumeroProcesso(request.getParameter("numeroProcesso"));
+		p.setLinhaMaterial(request.getParameter("linhaMaterial"));
+		p.setEixoTematico(request.getParameter("eixoTematico"));
+		p.setMembroEquipe(request.getParameter("membroEquipe"));
+
+		java.util.Date data = new java.util.Date();
+		p.setLd(data);
 		
-		ProcessoDao pDao = new ProcessoDao();
-				
-		request.setAttribute("processo", pDao.selecionarProcessoById(id));
-				
 		
+
+		try {
+			
+			ProcessoDao pDao = new ProcessoDao();
+			pDao.alterarProcesso(p);
+
+			String mensagem = "Atribuição alterada com sucesso!";
+			request.setAttribute("MSG", mensagem);
+			request.setAttribute("PROCESSO", p);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		RequestDispatcher rd = request.getRequestDispatcher("AlteraProcesso.jsp");
-		rd.forward(request, response);		
+		rd.forward(request, response);
 
 	}
 }
-

@@ -7,6 +7,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+	crossorigin="anonymous">
+</head>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -33,24 +38,44 @@
 	src="../resources/js_proprio/datatables_functions.js">
 	
 </script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+
+<script>
+	//Create DataTable
+	$(document).ready(function() {
+		$('#idTabelaProcessos').DataTable();
+	});
+</script>
+
+
+
 <title>Lista de Processos</title>
 </head>
+
 <body>
 
-	<div class="container">
+	<div class="container pt-3">
 
 		<h1>Lista de Processos</h1>
 		<br>
 
-		<table id="idTabelaProcessos" class="table table-striped">
+		<table id="idTabelaProcessos" class="table-responsive-lg table-striped">
 			<thead align="left">
 				<tr>
 					<th>Número do Processo</th>
 					<th>Linha de Material</th>
 					<th>Eixo Tematico</th>
 					<th>Colaborador</th>
+					<th>Fase</th>
 					<th>Data da Operação</th>
-					<th>Gerir</th>
+					<th>Editar</th>
 					<th>Apagar</th>
 
 				</tr>
@@ -61,18 +86,19 @@
 					<td>${processo.linhaMaterial}</td>
 					<td>${processo.eixoTematico}</td>
 					<td>${processo.membroEquipe}</td>
-
+					<td></td>
 					<!-- Formatação de Data de Operação-->
 					<fmt:parseDate var="dataOperacao" value="${processo.ld}"
 						pattern="yyyy-MM-dd" timeZone="GMT-3"></fmt:parseDate>
 					<fmt:formatDate type="date" value="${dataOperacao}"
 						var="dataOperacaoFormat" pattern="dd/MM/yyyy" />
 					<td>${dataOperacaoFormat}</td>
-					<td><a href="GerenciarProcessos?idProcesso=${processo.id}">Alterar</a>
-					</td>
-					<td><a
-						href="ApagarProcessos?idProcesso=${processo.id}">Apagar</a>
-					</td>
+					<td align="center"><a
+						href="GerenciarProcesso?idProcesso=${processo.id}"><i
+							class="fas fa-edit"></i></a></td>
+					<td align="center"><a
+						href="ApagarProcessos?idProcesso=${processo.id}"><i
+							class="far fa-trash-alt"></i></a></td>
 				</tr>
 
 			</c:forEach>
@@ -85,9 +111,6 @@
 				aria-disabled="true">Voltar a página inicial</a>
 		</div>
 	</div>
-
-
-
-
+	
 </body>
 </html>
