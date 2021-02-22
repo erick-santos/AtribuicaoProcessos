@@ -14,10 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.ProcessoDao;
+import model.Contagem;
 import model.Processo;
 
 @WebServlet("/AdicionaProcesso")
 public class AdicionaProcessoServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -33,17 +39,19 @@ public class AdicionaProcessoServlet extends HttpServlet {
 		p.setLd(data);
 
 		ProcessoDao pDao = new ProcessoDao();
-
+		// teste de conferencia de numero de processo
+		pDao.confereNumeroProcesso(request.getParameter("numeroProcesso"));
+		// fim do teste
 		try {
-
 			pDao.adicionarProcesso(p);
-			String mensagem = "Processo atribuido com sucesso!";
-
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		
+		
+		
+		
 		String mensagem = "Processo atribuido com sucesso!";
 		request.setAttribute("MSG", mensagem);
 

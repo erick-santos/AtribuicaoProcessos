@@ -41,6 +41,8 @@ public class AlteraProcessoServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 
 		RequestDispatcher rd = request.getRequestDispatcher("AlteraProcesso.jsp");
 		rd.forward(request, response);

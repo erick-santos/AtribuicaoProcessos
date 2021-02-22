@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setLocale value="pt_BR" />
 
 <!DOCTYPE html>
 <html>
@@ -36,216 +39,236 @@
 <title>Alteração de Processos</title>
 </head>
 <body>
-
-	<div class="container" style="padding: 20px" align="right">
-		<form action="ListarProcessos" method="get">
-			<button type="submit" class="btn btn-info btn-md">Listar
-				Processos Atribuidos</button>
-		</form>
-	</div>
-
-	<div class="container" align="left">
-
-		<h2>Alteração de Processos</h2>
-
-		<!-- Recebe o objeto processo de GerenciarProcessoServlet -->
-		<c:set var="processo" value="${PROCESSO}" />
-
-
-		<!-- Inicio da mensagem de sucesso -->
-		<%
-			String msg = (String) request.getAttribute("MSG");
-		%>
-		<%
-			if (msg != null) {
-			request.setAttribute("MSG", null);
-		%>
-		<div class="alert alert-success alert-dismissible fade show"
-			role="alert">
-			<strong><%=msg%></strong>
-			<button type="button" class="close" data-dismiss="alert"
-				aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<%
-			}
-		%>
-		<!-- Fim da mensagem de sucesso-->
-
-
-		<!-- Tabela com o processo a ser alterado -->
-		<table id="idTabelaProcessos" class="table table-striped">
-			<thead align="left">
-				<tr>
-					<th>Número do Processo</th>
-					<th>Linha de Material</th>
-					<th>Eixo Tematico</th>
-					<th>Colaborador</th>
-					<th>Fase</th>
-				</tr>
-			</thead>
-			<tr align="left">
-				<td>${PROCESSO.numeroProcesso}</td>
-				<td>${PROCESSO.linhaMaterial}</td>
-				<td>${PROCESSO.eixoTematico}</td>
-				<td>${PROCESSO.membroEquipe}</td>
-				<td>Não definido</td>
-			</tr>
-		</table>
-		<!-- Fim da Tabela com o processo a ser alterado -->
-		<br>
-
-		<!-- Construcao dos Radio Buttons  -->
-		<div>
-
-			<p>Para alterar escolha a linha de material:</p>
-
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="linhaMaterial"
-					id="linhaMaterial1" value="Consumo"> <label
-					class="form-check-label" for="exampleRadios1"> Consumo </label>
+	
+	<div class="container pt-3 border border-light" align="left">
+	<c:import url="Header.jsp"></c:import>
+	
+		<div align="center">
+			<div class="btn-group btn-group-lg" role="group">
+				<form action="ListarProcessos" method="get">
+					<button type="submit" class="btn btn-info btn-lg">Processos
+						Atribuidos</button>
+				</form>
+				<a href="TelaDistribuicao.jsp" class="btn btn-info btn-lg"
+					role="button" aria-disabled="true">Distribuição de Processos</a>
+				<form action="ContagemPorPessoa" method="get">
+					<button type="submit" class="btn btn-info btn-lg">Contagem
+						Por Pessoa</button>
+				</form>
+				<form action="XXX" method="get">
+					<button type="submit" class="btn btn-info btn-lg">Relatórios</button>
+				</form>
 			</div>
-
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="linhaMaterial"
-					id="linhaMaterial2" value="Permanente"> <label
-					class="form-check-label" for="exampleRadios2"> Permanente </label>
-			</div>
-
 		</div>
-		<!-- Fim dos Radio Buttons  -->
+
+		<div class="container pt-3 border border-light" align="left">
+
+			<h1 class="display-4">
+				Alteração de Processos
+				</h2>
+
+				<!-- Recebe o objeto processo de GerenciarProcessoServlet -->
+				<c:set var="processo" value="${PROCESSO}" />
 
 
-		<!-- Manipular divs conforme radio button escolhido -->
-
-		<!-- Div de Material de Consumo -->
-		<form action="AlteraProcesso" method="get">
-
-			<div class="col-md-12 div-consumo"
-				style="padding: 20px; display: none" align="left">
-				<div class="form-group">
-					<input type="hidden" name="idProcesso" value="${PROCESSO.id}">
-					<input type="text" value="${PROCESSO.numeroProcesso}"
-						class="form-control" name="numeroProcesso"
-						placeholder="Insira o número do processo" required="required"
-						maxlength="64"> <input type="hidden" name="linhaMaterial"
-						value="Consumo">
-
+				<!-- Inicio da mensagem de sucesso -->
+				<%
+					String msg = (String) request.getAttribute("MSG");
+				%>
+				<%
+					if (msg != null) {
+					request.setAttribute("MSG", null);
+				%>
+				<div class="alert alert-success alert-dismissible fade show"
+					role="alert">
+					<strong><%=msg%></strong>
+					<button type="button" class="close" data-dismiss="alert"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
+				<%
+					}
+				%>
+				<!-- Fim da mensagem de sucesso-->
 
 
-				<p>Escolha a eixo temático:</p>
-				<select class="form-control" name="eixoTematico" required="required">
-					<!-- Inclusão de Opções de Material de Consumo  -->
-					<option></option>
-					<option>GENERO DE ALIMENTAÇÃO</option>
-					<option>MATERIAL EDUCATIVO E ESPORTIVO</option>
-					<option>MATERIAL PARA FESTIVIDADES E HOMENAGENS</option>
-					<option>MATERIAL DE EXPEDIENTE</option>
-					<option>MATERIAL P/ PROCESSAMENTO DE DADOS</option>
-					<option>MATERIAL P/ ACONDICIONAMENTO E EMBALAGENS</option>
-					<option>MATERIAL DE CAMA, MESA E BANHO</option>
-					<option>MATERIAL DE COPA E COZINHA</option>
-					<option>MATERIAL DE LIMPEZA E PRODUTOS DE HIGIENIZAÇAO</option>
-					<option>UNIFORMES, TECIDOS E AVIAMENTOS</option>
-					<option>MATERIAL P/MANUTENÇÃO DE BENS IMÓVEIS</option>
-					<option>MATERIAL P/ MANUTENÇAO DE BENS MÓVEIS</option>
-					<option>MATERIAL ELÉTRICO E ELETRÔNICO</option>
-					<option>MATERIAL DE MANOBRA DE PATRULHAMENTO</option>
-					<option>MATERIAL DE PROTEÇÃO E SEGURANÇA</option>
-					<option>MATERIAL P/ ÁUDIO, VÍDEO E FOTO</option>
-					<option>MATERIAL PARA COMUNICAÇÕES</option>
-					<option>SEMENTES, MUDAS DE PLANTAS E INSUMOS</option>
-					<option>MATERIAL LABORATORIAL</option>
-					<option>MATERIAL HOSPITALAR</option>
-					<option>MATERIAL P/MANUTENÇÃO DE VEÍCULOS</option>
-					<option>MATERIAL P/ UTILIZAÇÃO EM GRÁFICA</option>
-					<option>FERRAMENTAS</option>
-					<option>MATERIAL P/ REABILITAÇÃO PROFISSIONAL</option>
-					<option>MATERIAL SINALIZAÇÃO VISUAL E OUTROS</option>
-					<option>MATERIAL TÉCNICO PARA SELEÇÃO E TREINMENTO</option>
-					<option>MATERIAL BIBLIOGRÁFICO</option>
-					<option>AQUISIÇÃO DE SOFTWARES DE BASE</option>
-					<option>BANDEIRAS, FLÂMULAS E INSÍGNIAS</option>
-					<option>DISCOTECAS E FILMOTECAS NÃO IMOBILIZÁVEL</option>
-					<option>MATERIAL PARA DIVULGAÇÃO</option>
-
-				</select>
-
-				<!-- Seleção de Colaborador -->
+				<!-- Tabela com o processo a ser alterado -->
+				<table id="idTabelaProcessos" class="table table-striped">
+					<thead align="left">
+						<tr>
+							<th>Número do Processo</th>
+							<th>Linha de Material</th>
+							<th>Eixo Tematico</th>
+							<th>Colaborador</th>
+							<th>Fase</th>
+						</tr>
+					</thead>
+					<tr align="left">
+						<td>${PROCESSO.numeroProcesso}</td>
+						<td>${PROCESSO.linhaMaterial}</td>
+						<td>${PROCESSO.eixoTematico}</td>
+						<td>${PROCESSO.membroEquipe}</td>
+						<td>Não definido</td>
+					</tr>
+				</table>
+				<!-- Fim da Tabela com o processo a ser alterado -->
 				<br>
-				<p>Escolha o colaborador:</p>
-				<select class="form-control" name="membroEquipe" required="required">
-					<!-- Inclusão de Opções de Material de Consumo  -->
-					<option></option>
-					<option>ZippyRascal</option>
-					<option>RuddyNapoleon</option>
-					<option>KaputEgg</option>
-					<option>DefiantDallas</option>
-					<option>EarthyLeo</option>
 
-				</select>
-				<!-- Fim de Seleção de Colaborador -->
+				<!-- Construcao dos Radio Buttons  -->
+				<div>
 
-				<!-- Botões -->
-				<div align="left">
-					<br>
-					<button type="submit" class="btn btn-primary btn-lg">Atribuir
-						Processo</button>
-				</div>
-				<!--  Fim de Botões -->
-			</div>
-		</form>
+					<p>Para alterar escolha a linha de material:</p>
 
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="linhaMaterial"
+							id="linhaMaterial1" value="Consumo"> <label
+							class="form-check-label" for="exampleRadios1"> Consumo </label>
+					</div>
 
-
-		<!-- Div de Material Permanente -->
-		<form action="AlteraProcesso" method="get">
-			<div class=" col-md-12 div-permanente"
-				style="padding: 20px; display: none" align="left">
-				<div class="form-group">
-
-					<input type="hidden" name="idProcesso" value="${PROCESSO.id}">
-					<input type="text" value="${PROCESSO.numeroProcesso}"
-						class="form-control" name="numeroProcesso"
-						placeholder="Insira o número do processo" required="required"
-						maxlength="64"> <input type="hidden" name="linhaMaterial"
-						value="Permanente">
-
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="linhaMaterial"
+							id="linhaMaterial2" value="Permanente"> <label
+							class="form-check-label" for="exampleRadios2"> Permanente
+						</label>
+					</div>
 
 				</div>
+				<!-- Fim dos Radio Buttons  -->
 
 
-				<p>Escolha a eixo temático:</p>
-				<select class="form-control" name="eixoTematico" required="required">
-					<!-- Inclusão de Opções Permanente  -->
-					<option></option>
-					<option>APARELHOS DE MEDICAO E ORIENTACAO</option>
-					<option>APARELHOS E EQUIPAMENTOS DE COMUNICACAO</option>
-					<option>EQUIPAM/UTENSILIOS MEDICOS,ODONTO,LAB E HOSP</option>
-					<option>APARELHO E EQUIPAMENTO P/ESPORTES E DIVERSOES</option>
-					<option>EQUIPAMENTO DE PROTECAO, SEGURANCA E SOCORRO</option>
+				<!-- Manipular divs conforme radio button escolhido -->
 
-					<option>EQUIPAMENTOS DE PROCESSAMENTO DE DADOS</option>
-					<option>EQUIPAMENTOS PARA AUDIO, VIDEO E FOTO</option>
-					<option>MAQUINAS E UTENSILIOS DE ESCRITORIO</option>
-					<option>APARELHOS E UTENSILIOS DOMESTICOS</option>
-					<option>MOBILIARIO EM GERAL</option>
-					<option>COLECOES E MATERIAIS BIBLIOGRAFICOS</option>
-					<option>DISCOTECAS E FILMOTECA</option>
+				<!-- Div de Material de Consumo -->
+				<form action="AlteraProcesso" method="get">
 
-					<option>VEICULOS EM GERAL</option>
-					<option>VEICULOS DE TRACAO MECANICA</option>
-					<option>EQUIPAMENTOS, PECAS E ACESSORIOS P/AUTOMOVEIS</option>
-					<option>EQUIPAMENTOS HIDRAULICOS E ELETRICOS</option>
+					<div class="col-md-12 div-consumo"
+						style="padding: 20px; display: none" align="left">
+						<div class="form-group">
+							<input type="hidden" name="idProcesso" value="${PROCESSO.id}">
+							<input type="text" value="${PROCESSO.numeroProcesso}"
+								class="form-control" name="numeroProcesso"
+								placeholder="Insira o número do processo" required="required"
+								maxlength="64"> <input type="hidden"
+								name="linhaMaterial" value="Consumo">
 
-					<option>MAQUINAS, FERRAMENTAS E UTENSILIOS DE OFICINA</option>
-					<option>MAQUINAS, UTENSILIOS E EQUIPAMENTOS DIVERSOS</option>
+						</div>
 
 
-					<!-- Não utilizados -->
-					<!-- 
+						<p>Escolha a eixo temático:</p>
+						<select class="form-control" name="eixoTematico"
+							required="required">
+							<!-- Inclusão de Opções de Material de Consumo  -->
+							<option></option>
+							<option>GENERO DE ALIMENTAÇÃO</option>
+							<option>MATERIAL EDUCATIVO E ESPORTIVO</option>
+							<option>MATERIAL PARA FESTIVIDADES E HOMENAGENS</option>
+							<option>MATERIAL DE EXPEDIENTE</option>
+							<option>MATERIAL P/ PROCESSAMENTO DE DADOS</option>
+							<option>MATERIAL P/ ACONDICIONAMENTO E EMBALAGENS</option>
+							<option>MATERIAL DE CAMA, MESA E BANHO</option>
+							<option>MATERIAL DE COPA E COZINHA</option>
+							<option>MATERIAL DE LIMPEZA E PRODUTOS DE HIGIENIZAÇAO</option>
+							<option>UNIFORMES, TECIDOS E AVIAMENTOS</option>
+							<option>MATERIAL P/MANUTENÇÃO DE BENS IMÓVEIS</option>
+							<option>MATERIAL P/ MANUTENÇAO DE BENS MÓVEIS</option>
+							<option>MATERIAL ELÉTRICO E ELETRÔNICO</option>
+							<option>MATERIAL DE MANOBRA DE PATRULHAMENTO</option>
+							<option>MATERIAL DE PROTEÇÃO E SEGURANÇA</option>
+							<option>MATERIAL P/ ÁUDIO, VÍDEO E FOTO</option>
+							<option>MATERIAL PARA COMUNICAÇÕES</option>
+							<option>SEMENTES, MUDAS DE PLANTAS E INSUMOS</option>
+							<option>MATERIAL LABORATORIAL</option>
+							<option>MATERIAL HOSPITALAR</option>
+							<option>MATERIAL P/MANUTENÇÃO DE VEÍCULOS</option>
+							<option>MATERIAL P/ UTILIZAÇÃO EM GRÁFICA</option>
+							<option>FERRAMENTAS</option>
+							<option>MATERIAL P/ REABILITAÇÃO PROFISSIONAL</option>
+							<option>MATERIAL SINALIZAÇÃO VISUAL E OUTROS</option>
+							<option>MATERIAL TÉCNICO PARA SELEÇÃO E TREINMENTO</option>
+							<option>MATERIAL BIBLIOGRÁFICO</option>
+							<option>AQUISIÇÃO DE SOFTWARES DE BASE</option>
+							<option>BANDEIRAS, FLÂMULAS E INSÍGNIAS</option>
+							<option>DISCOTECAS E FILMOTECAS NÃO IMOBILIZÁVEL</option>
+							<option>MATERIAL PARA DIVULGAÇÃO</option>
+
+						</select>
+
+						<!-- Seleção de Colaborador -->
+						<br>
+						<p>Escolha o colaborador:</p>
+						<select class="form-control" name="membroEquipe"
+							required="required">
+							<!-- Inclusão de Opções de Material de Consumo  -->
+							<option></option>
+							<option>ZippyRascal</option>
+							<option>RuddyNapoleon</option>
+							<option>KaputEgg</option>
+							<option>DefiantDallas</option>
+							<option>EarthyLeo</option>
+
+						</select>
+						<!-- Fim de Seleção de Colaborador -->
+
+						<!-- Botões -->
+						<div align="left">
+							<br>
+							<button type="submit" class="btn btn-primary btn-lg">Atribuir
+								Processo</button>
+						</div>
+						<!--  Fim de Botões -->
+					</div>
+				</form>
+
+
+
+				<!-- Div de Material Permanente -->
+				<form action="AlteraProcesso" method="get">
+					<div class=" col-md-12 div-permanente"
+						style="padding: 20px; display: none" align="left">
+						<div class="form-group">
+
+							<input type="hidden" name="idProcesso" value="${PROCESSO.id}">
+							<input type="text" value="${PROCESSO.numeroProcesso}"
+								class="form-control" name="numeroProcesso"
+								placeholder="Insira o número do processo" required="required"
+								maxlength="64"> <input type="hidden"
+								name="linhaMaterial" value="Permanente">
+
+
+						</div>
+
+
+						<p>Escolha a eixo temático:</p>
+						<select class="form-control" name="eixoTematico"
+							required="required">
+							<!-- Inclusão de Opções Permanente  -->
+							<option></option>
+							<option>APARELHOS DE MEDICAO E ORIENTACAO</option>
+							<option>APARELHOS E EQUIPAMENTOS DE COMUNICACAO</option>
+							<option>EQUIPAM/UTENSILIOS MEDICOS,ODONTO,LAB E HOSP</option>
+							<option>APARELHO E EQUIPAMENTO P/ESPORTES E DIVERSOES</option>
+							<option>EQUIPAMENTO DE PROTECAO, SEGURANCA E SOCORRO</option>
+
+							<option>EQUIPAMENTOS DE PROCESSAMENTO DE DADOS</option>
+							<option>EQUIPAMENTOS PARA AUDIO, VIDEO E FOTO</option>
+							<option>MAQUINAS E UTENSILIOS DE ESCRITORIO</option>
+							<option>APARELHOS E UTENSILIOS DOMESTICOS</option>
+							<option>MOBILIARIO EM GERAL</option>
+							<option>COLECOES E MATERIAIS BIBLIOGRAFICOS</option>
+							<option>DISCOTECAS E FILMOTECA</option>
+
+							<option>VEICULOS EM GERAL</option>
+							<option>VEICULOS DE TRACAO MECANICA</option>
+							<option>EQUIPAMENTOS, PECAS E ACESSORIOS P/AUTOMOVEIS</option>
+							<option>EQUIPAMENTOS HIDRAULICOS E ELETRICOS</option>
+
+							<option>MAQUINAS, FERRAMENTAS E UTENSILIOS DE OFICINA</option>
+							<option>MAQUINAS, UTENSILIOS E EQUIPAMENTOS DIVERSOS</option>
+
+
+							<!-- Não utilizados -->
+							<!-- 
 					<option>ARMAMENTOS</option>
 					<option>PECAS NAO INCORPORAVEIS A IMOVEIS</option>
 					<option>MATERIAL DE USO DURADOURO</option>
@@ -256,35 +279,36 @@
 					<option>MAQUINAS E EQUIPAMENTOS INDUSTRIAIS</option>
 					<option>MAQUINAS E EQUIPAMENTOS ENERGETICOS</option>
 					 -->
-				</select>
+						</select>
 
-				<!-- Seleção de Colaborador -->
-				<br>
-				<p>Escolha o colaborador:</p>
-				<select class="form-control" name="membroEquipe" required="required">
-					<!-- Inclusão de Opções de Material de Consumo  -->
-					<option></option>
-					<option>ZippyRascal</option>
-					<option>RuddyNapoleon</option>
-					<option>KaputEgg</option>
-					<option>DefiantDallas</option>
-					<option>EarthyLeo</option>
+						<!-- Seleção de Colaborador -->
+						<br>
+						<p>Escolha o colaborador:</p>
+						<select class="form-control" name="membroEquipe"
+							required="required">
+							<!-- Inclusão de Opções de Material de Consumo  -->
+							<option></option>
+							<option>ZippyRascal</option>
+							<option>RuddyNapoleon</option>
+							<option>KaputEgg</option>
+							<option>DefiantDallas</option>
+							<option>EarthyLeo</option>
 
-				</select>
+						</select>
 
-				<!-- Fim de Seleção de Colaborador -->
+						<!-- Fim de Seleção de Colaborador -->
 
 
-				<!-- Botões -->
-				<div align="left">
-					<br>
-					<button type="submit" class="btn btn-primary btn-lg">Atribuir
-						Processo</button>
-				</div>
-				<!--  Fim de Botões -->
-			</div>
-		</form>
-
+						<!-- Botões -->
+						<div align="left">
+							<br>
+							<button type="submit" class="btn btn-primary btn-lg">Atribuir
+								Processo</button>
+						</div>
+						<!--  Fim de Botões -->
+					</div>
+				</form>
+		</div>
 		<br>
 	</div>
 </body>

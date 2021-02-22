@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.ProcessoDao;
+import model.Contagem;
 
 @WebServlet("/ListarProcessos")
 public class ListarProcessosServlet extends HttpServlet {
@@ -19,6 +21,8 @@ public class ListarProcessosServlet extends HttpServlet {
 		ProcessoDao pDao = new ProcessoDao();
 
 		request.setAttribute("lista", pDao.listarProcesso());
+
+		
 
 		RequestDispatcher rd = request.getRequestDispatcher("ListaProcessos.jsp");
 		rd.forward(request, response);

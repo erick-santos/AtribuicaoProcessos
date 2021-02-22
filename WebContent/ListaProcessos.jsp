@@ -5,6 +5,7 @@
 <fmt:setLocale value="pt_BR" />
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet"
@@ -28,8 +29,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
 	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="../resources/css_proprio/datatables_customizado.css">
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script
@@ -44,9 +44,6 @@
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
-<script src="https://code.highcharts.com/highcharts.js"></script>
-
-
 <script>
 	//Create DataTable
 	$(document).ready(function() {
@@ -54,63 +51,80 @@
 	});
 </script>
 
-
-
 <title>Lista de Processos</title>
 </head>
 
 <body>
 
-	<div class="container pt-3">
 
-		<h1>Lista de Processos</h1>
-		<br>
+	<div class="container pt-3 border border-light" align="left">
+		<c:import url="Header.jsp"></c:import>
 
-		<table id="idTabelaProcessos" class="table-responsive-lg table-striped">
-			<thead align="left">
-				<tr>
-					<th>Número do Processo</th>
-					<th>Linha de Material</th>
-					<th>Eixo Tematico</th>
-					<th>Colaborador</th>
-					<th>Fase</th>
-					<th>Data da Operação</th>
-					<th>Editar</th>
-					<th>Apagar</th>
+		<div class="container pt-3 border border-light" align="left">
 
-				</tr>
-			</thead>
-			<c:forEach items="${lista}" var="processo">
-				<tr align="left">
-					<td>${processo.numeroProcesso}</td>
-					<td>${processo.linhaMaterial}</td>
-					<td>${processo.eixoTematico}</td>
-					<td>${processo.membroEquipe}</td>
-					<td></td>
-					<!-- Formatação de Data de Operação-->
-					<fmt:parseDate var="dataOperacao" value="${processo.ld}"
-						pattern="yyyy-MM-dd" timeZone="GMT-3"></fmt:parseDate>
-					<fmt:formatDate type="date" value="${dataOperacao}"
-						var="dataOperacaoFormat" pattern="dd/MM/yyyy" />
-					<td>${dataOperacaoFormat}</td>
-					<td align="center"><a
-						href="GerenciarProcesso?idProcesso=${processo.id}"><i
-							class="fas fa-edit"></i></a></td>
-					<td align="center"><a
-						href="ApagarProcessos?idProcesso=${processo.id}"><i
-							class="far fa-trash-alt"></i></a></td>
-				</tr>
+			<h1 class="display-4">Lista de Processos</h1>
+			<br>
+			<div align="right">
+				<div class="btn-group btn-group-sm">
+					<form action="Relatorio" method="get">
+						<button type="submit" class="btn btn-success btn-sm">Exportar
+							.xlsx</button>
+					</form>
+					<form action="Relatorio" method="get">
+						<button type="submit" class="btn btn-danger btn-sm">Exportar
+							.pdf</button>
+					</form>
+				</div>
+			</div>
+			<br>
 
-			</c:forEach>
-		</table>
+			<table id="idTabelaProcessos" class="table-responsive-sm">
+				<thead align="left">
+					<tr>
+						<th>Número do Processo</th>
+						<th>Linha de Material</th>
+						<th>Eixo Tematico</th>
+						<th>Colaborador</th>
+						<th>Fase</th>
+						<th>Data da Operação</th>
+						<th>Editar</th>
+						<th>Apagar</th>
+
+					</tr>
+				</thead>
+				<c:forEach items="${lista}" var="processo">
+					<tr align="left">
+						<td>${processo.numeroProcesso}</td>
+						<td>${processo.linhaMaterial}</td>
+						<td>${processo.eixoTematico}</td>
+						<td>${processo.membroEquipe}</td>
+						<td></td>
+						<!-- Formatação de Data de Operação-->
+						<fmt:parseDate var="dataOperacao" value="${processo.ld}"
+							pattern="yyyy-MM-dd" timeZone="GMT-3"></fmt:parseDate>
+						<fmt:formatDate type="date" value="${dataOperacao}"
+							var="dataOperacaoFormat" pattern="dd/MM/yyyy" />
+						<td>${dataOperacaoFormat}</td>
+						<td align="center"><a
+							href="GerenciarProcesso?idProcesso=${processo.id}"><i
+								class="fas fa-edit"></i></a></td>
+						<td align="center"><a
+							href="ApagarProcessos?idProcesso=${processo.id}"><i
+								class="far fa-trash-alt"></i></a></td>
+					</tr>
+
+				</c:forEach>
+			</table>
 
 
-		<br> <br>
-		<div align="right">
-			<a href="TelaDistribuicao.jsp" class="btn btn-primary" role="button"
-				aria-disabled="true">Voltar a página inicial</a>
+			<br>
+			<div align="right">
+				<a href="TelaDistribuicao.jsp" class="btn btn-primary" role="button"
+					aria-disabled="true">Voltar a página inicial</a>
+			</div>
+			<br>
 		</div>
 	</div>
-	
+
 </body>
 </html>

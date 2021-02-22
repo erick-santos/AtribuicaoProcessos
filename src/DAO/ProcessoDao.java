@@ -1,14 +1,13 @@
 package DAO;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 import model.Contagem;
 import model.Processo;
@@ -23,7 +22,8 @@ public class ProcessoDao {
 
 	// ok
 	public void adicionarProcesso(Processo u) throws SQLException {
-					
+		conexao = new ConnectionFactory().getConnection();
+
 		String sql = "INSERT INTO tbl_Processo (numeroProcesso, linhaMaterial, eixoTematico, membroEquipe, data) VALUES (?,?,?,?,?)";
 		try {
 
@@ -143,33 +143,107 @@ public class ProcessoDao {
 			e.printStackTrace();
 		}
 	}
-	
-	// ok
-		public Processo confereNumeroProcesso(String numeroProcesso) {
 
-			conexao = new ConnectionFactory().getConnection();
-			Processo p = new Processo();
-			String sql = "SELECT * FROM tbl_Processo WHERE numeroProcesso = ?";
-			try {
-				PreparedStatement comando = conexao.prepareStatement(sql);
-				comando.setString(1, p.getNumeroProcesso());
-				ResultSet rs = comando.executeQuery();
+	//
+	public boolean confereNumeroProcesso(String numeroProcesso) {
+		boolean checagem = false;
+		conexao = new ConnectionFactory().getConnection();
 
-				rs.next();
-				p.setNumeroProcesso(rs.getString("numeroProcesso"));
-				
+		String sql = "SELECT * FROM tbl_Processo WHERE numeroProcesso = ?";
+		try {
+			PreparedStatement comando = conexao.prepareStatement(sql);
+			comando.setString(1, numeroProcesso);
+			ResultSet rs = comando.executeQuery();
 
-				comando.close();
-				conexao.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			rs.next();
+
+			String consulta = rs.getString("numeroProcesso");
+
+			if (consulta.isEmpty()) {
+				System.out.println("O processo não foi cadastrado");
+				System.out.println(checagem);
 			}
-			return p;
+			if (consulta.equals(numeroProcesso)) {
+				System.out.println("O processo" + consulta + "já estava cadastrado.");
+				checagem = true;
+				System.out.println(checagem);
+			}
 
+			comando.close();
+			conexao.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return checagem;
+	}
 
 	// not working
-	public void contagemPorPessoa() {
+	public Contagem contagemPorPessoa() throws SQLException {
+
+		/*
+		 * String sql = "SELECT COUNT(id) FROM tbl_processo WHERE membroEquipe=?";
+		 * 
+		 * PreparedStatement comando = conexao.prepareStatement(sql);
+		 * comando.setString(1, "ZippyRascal"); ResultSet rs = comando.executeQuery();
+		 * rs.next();
+		 * 
+		 * System.out.println((rs.getString("membroEquipe")));
+		 * 
+		 * c.setMembro1(Integer.parseInt(rs.getString("membroEquipe")));
+		 */
+
+		conexao = new ConnectionFactory().getConnection();
+		Contagem c = new Contagem();
+		int numberOfRows = 0;
+
+		Vector<String> sql = new Vector<String>();
+		sql.add("SELECT COUNT(*) FROM tbl_processo");
+		sql.add("SELECT COUNT(membroEquipe) FROM tbl_processo WHERE membroEquipe ='ZippyRascal'");
+		sql.add("SELECT COUNT(membroEquipe) FROM tbl_processo WHERE membroEquipe ='RuddyNapoleon'");
+		sql.add("SELECT COUNT(membroEquipe) FROM tbl_processo WHERE membroEquipe ='KaputEgg'");
+		sql.add("SELECT COUNT(membroEquipe) FROM tbl_processo WHERE membroEquipe ='DefiantDallas'");
+		sql.add("SELECT COUNT(membroEquipe) FROM tbl_processo WHERE membroEquipe ='EarthyLeo'");
+
+		for (String stringSql : sql) {
+			PreparedStatement comando = conexao.prepareStatement(stringSql);
+
+			ResultSet rs = comando.executeQuery();
+
+			if (rs.next()) {
+				numberOfRows = rs.getInt(1);
+			} 
+
+			if (stringSql.contains("SELECT COUNT(*) FROM tbl_processo")) {
+				c.setTotal(numberOfRows);
+			}
+
+			if (stringSql.contains("'ZippyRascal'")) {
+				c.setMembro1(numberOfRows);
+			}
+
+			if (stringSql.contains("'RuddyNapoleon'")) {
+				c.setMembro2(numberOfRows);
+			}
+
+			if (stringSql.contains("'KaputEgg'")) {
+				c.setMembro3(numberOfRows);
+			}
+
+			if (stringSql.contains("'DefiantDallas'")) {
+				c.setMembro4(numberOfRows);
+			}
+
+			if (stringSql.contains("'EarthyLeo'")) {
+				c.setMembro5(numberOfRows);
+			}
+
+			rs.close();
+			comando.close();
+			//
+		}
+		conexao.close();
+
+		return c;
 	}
 
 }

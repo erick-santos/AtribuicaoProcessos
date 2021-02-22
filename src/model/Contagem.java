@@ -6,6 +6,7 @@ public class Contagem {
 	private int membro3;
 	private int membro4;
 	private int membro5;
+	private int total;
 
 	public int getMembro1() {
 		return membro1;
@@ -45,6 +46,14 @@ public class Contagem {
 
 	public void setMembro5(int membro5) {
 		this.membro5 = membro5;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
 }
